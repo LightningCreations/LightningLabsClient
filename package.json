@@ -1,27 +1,25 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "ll-client",
   "version": "1.0.0",
-  "description": "A minimal Electron application written with Typescript",
+  "description": "Client for Lightning Labs",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js"
   },
-  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "repository": "https://github.com/LightningCreations/LightningLabsClient",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo",
-    "typescript"
+    "lc",
+    "lchq",
+    "ll"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Lightning Creations",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.5",
+    "@typescript-eslint/parser": "^5.59.5",
     "electron": "^24.2.0",
     "eslint": "^8.40.0",
     "typescript": "^5.0.4"
