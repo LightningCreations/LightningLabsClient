@@ -1,15 +1,7 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
-  },
-  "include": [
-    "src/**/*"
-  ]
+  "references": [
+    { "path": "src/tsconfig.json" },
+    { "path": "ui-ts/tsconfig.json" }
+  ],
+  "include": []
 }

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Client for Lightning Labs",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "tsc -b",
+    "watch": "tsc -b -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js"
   },
