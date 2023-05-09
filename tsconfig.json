@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "target": "ES2020"
+  },
   "references": [
     { "path": "src/tsconfig.json" },
     { "path": "ui-ts/tsconfig.json" }

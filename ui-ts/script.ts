@@ -3,4 +3,4 @@ window.onload = () => {
     if (!electron_enabled_flag.hidden) {
         console.log("Electron detected");
     }
-}
+};
