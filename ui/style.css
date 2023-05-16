@@ -1,0 +1,45 @@
+:root {
+    --spacing: 10px;
+    --background: 255, 255, 255;
+    --main-color: 0, 0, 0;
+    --size-transitions: margin 0.1s, padding 0.1s, height 0.1s, width 0.1s, border-radius 0.1s;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    width: calc(100vw - var(--spacing));
+    height: calc(100vh - var(--spacing));
+    margin: 0;
+    padding: 0;
+
+    transition: background-color 1s, var(--size-transitions);
+
+    background: linear-gradient(150deg, magenta -50%, transparent 50%),
+    linear-gradient(210deg, cyan -50%, transparent 50%),
+    linear-gradient(330deg, yellow -50%, transparent 50%),
+    linear-gradient(30deg, firebrick -50%, transparent 50%);
+    background-color: rgb(var(--background));
+
+    color: rgb(var(--main-color));
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.card {
+    margin: var(--spacing) 0 0 var(--spacing);
+    padding: var(--spacing);
+    width: calc(100% - calc(var(--spacing) * 3));
+    height: calc(50% - calc(var(--spacing) * 3));
+
+    transition: color 1s, background-color 1s, var(--size-transitions);
+    /* transition: color 1s; */
+
+    border-radius: calc(var(--spacing) * 1.5);
+
+    background: rgba(var(--background), 0.8);
+    box-shadow: grey 0px 0px 10px;
+}
