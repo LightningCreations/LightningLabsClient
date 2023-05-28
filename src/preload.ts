@@ -11,6 +11,10 @@ window.addEventListener("DOMContentLoaded", () => {
   // for (const type of ["chrome", "node", "electron"]) {
   //   replaceText(`${type}-version`, process.versions[type as keyof NodeJS.ProcessVersions]);
   // }
-  const electron_enabled_flag = document.getElementById("electron_enabled");
-  electron_enabled_flag.hidden = false;
+  const electron_enabled_flag = document.getElementById("electron-enabled");
+  if (electron_enabled_flag === null) {
+    console.error("electron-enabled flag was not detected");
+  } else {
+    electron_enabled_flag.hidden = false;
+  }
 });

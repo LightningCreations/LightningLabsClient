@@ -20,21 +20,28 @@ body {
     transition: background-color 1s, var(--size-transitions);
 
     background: linear-gradient(150deg, magenta -50%, transparent 50%),
-    linear-gradient(210deg, cyan -50%, transparent 50%),
-    linear-gradient(330deg, yellow -50%, transparent 50%),
-    linear-gradient(30deg, firebrick -50%, transparent 50%);
+        linear-gradient(210deg, cyan -50%, transparent 50%),
+        linear-gradient(330deg, yellow -50%, transparent 50%),
+        linear-gradient(30deg, firebrick -50%, transparent 50%);
     background-color: rgb(var(--background));
 
     color: rgb(var(--main-color));
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    display: flex;
+}
+
+.divider-vert {
+    margin: var(--spacing) 0 0 var(--spacing);
+    border-right: 3px solid grey;
+    padding: 0 0 var(--spacing) 0;
+    transition: color 1s, background-color 1s, var(--size-transitions);
 }
 
 .card {
     margin: var(--spacing) 0 0 var(--spacing);
     padding: var(--spacing);
-    width: calc(100% - calc(var(--spacing) * 3));
-    height: calc(50% - calc(var(--spacing) * 3));
-
+    flex: 1;
     transition: color 1s, background-color 1s, var(--size-transitions);
     /* transition: color 1s; */
 

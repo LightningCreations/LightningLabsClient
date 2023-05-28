@@ -15,7 +15,8 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "../ui/index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+  // that gets annoying with a tiny window
 }
 
 // This method will be called when Electron has finished

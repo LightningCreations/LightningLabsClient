@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <div id="electron_enabled" hidden></div>
-    <meta charset="UTF-8" />
-    <title>Hello World!</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div class="card">
-        This is a div with the card class!<br><br>
-        The spacing on this page is 
-        <input id="spacingSlider"
-        type="number"
-        value="10"
-        min="0"
-        max="50"
-        oninput="document.querySelector(':root').style.setProperty('--spacing', document.getElementById('spacingSlider').value*1 + 'px')"> pixels
-    </div>
-    <div class="card">
-        This is another card for visual effect. Currently they are absolutely positioned,
-        but will eventually be put into either a grid or flexboxes. Not sure which one yet.<br><br>
-        Try different background tones (experimental):
-        <button onclick="nextTheme();">Swap</button>
-    </div>
-  </body>
+
+<head>
+  <div id="electron-enabled" hidden></div>
+  <meta charset="UTF-8" />
+  <title>Hello World!</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="card">
+    This is a div with the card class!<br><br>
+    The spacing on this page is
+    <input id="spacingSlider" type="number" value="10" min="0" max="50"
+      oninput="document.querySelector(':root').style.setProperty('--spacing', document.getElementById('spacingSlider').value*1 + 'px')">
+    pixels
+  </div>
+  <div class="divider-vert"></div>
+  <div class="card">
+    This is another card for visual effect. <s>Currently they are absolutely positioned, but will eventually be put into
+      either a grid or flexboxes. Not sure which one yet.</s> JK, we're using flexboxes, yeet.
+    <br /><br />
+    Try different background tones (experimental):
+    <button onclick="nextTheme();">Swap</button>
+  </div>
+</body>
+
 </html>
