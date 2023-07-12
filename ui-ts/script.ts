@@ -34,7 +34,7 @@ let currentTheme = 0;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function nextTheme() { // Used directly in HTML as demonstration (for now)
-    const colors: Array<Array<string>> = [
+    const colors = [
         ["255, 255, 255", "0, 0, 0"],
         ["0, 0, 0", "255, 255, 255"],
         ["20, 25, 30", "255, 255, 255"],
