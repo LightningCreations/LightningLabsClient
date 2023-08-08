@@ -86,22 +86,22 @@ function addPanelTest(name : string) {
     .catch(alert);
 }
 
-const textRenderObserver = new MutationObserver((mutationList) => {
-    for (const mutation of mutationList) {
-        if (mutation.type === "childList") {
-            mutation.addedNodes.forEach(el => {
-                console.log(el);
-                switch(el.getAttribute("data-render-timing")) {
-                    default:
-                        addEventListener(el.getAttribute("data-render-timing"), (e) => e.innerHTML = renderString(e.innerHTML));
-                }
-            });
-        }
-    }
-});
+// const textRenderObserver = new MutationObserver((mutationList) => {
+//     for (const mutation of mutationList) {
+//         if (mutation.type === "childList") {
+//             mutation.addedNodes.forEach(el => {
+//                 console.log(el);
+//                 switch(el.getAttribute("data-render-timing")) {
+//                     default:
+//                         addEventListener(el.getAttribute("data-render-timing"), (e) => e.innerHTML = renderString(e.innerHTML));
+//                 }
+//             });
+//         }
+//     }
+// });
 
-textRenderObserver.observe(document.body, { subtree: true, childList: true });
+// textRenderObserver.observe(document.body, { subtree: true, childList: true });
 
-function renderString(text : string) {
-    return `<em>${text}</em>`;
-}
+// function renderString(text : string) {
+//     return `<em>${text}</em>`;
+// }
