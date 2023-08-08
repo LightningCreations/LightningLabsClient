@@ -26,23 +26,37 @@ body {
     background-color: rgb(var(--background));
 
     color: rgb(var(--main-color));
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16.25px;
 
     display: flex;
 }
 
 .divider-vert {
-    margin: var(--spacing) 0 0 var(--spacing);
-    border-right: 3px solid grey;
-    padding: 0 0 var(--spacing) 0;
-    transition: color 1s, background-color 1s, var(--size-transitions);
+    margin: 0 calc(var(--spacing) * -1);
+    background: transparent;
+    border-radius: var(--spacing);
+    padding: var(--spacing);
+    transition: color 0.5s, box-shadow 0.3s, background-color 0.5s;
+}
+.divider-vert:hover {
+    background: rgba(0, 200, 255, 0.2);
+    box-shadow: 0px 0px 3px rgb(0, 200, 255) inset;
 }
 
+/* .divider-horz {
+    margin: 0 var(--spacing) var(--spacing) 0;
+    border-top: 3px solid grey;
+    padding: 0 0 0 var(--spacing);
+    transition: color 1s, background-color 1s, var(--size-transitions);
+} */
+
 .card {
-    margin: var(--spacing) 0 0 var(--spacing);
+    margin: var(--spacing);
     padding: var(--spacing);
     flex: 1;
-    transition: color 1s, background-color 1s, var(--size-transitions);
+    transition: color 1s, background-color 1s/*, var(--size-transitions)*/;
     /* transition: color 1s; */
 
     border-radius: calc(var(--spacing) * 1.5);

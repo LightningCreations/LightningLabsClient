@@ -28,6 +28,30 @@ window.onload = () => {
             };
         });
     }
+
+    for (const divider of document.getElementsByClassName("divider-horz")) {
+        divider.addEventListener("mousedown", (e) => {
+            const target = e.target as HTMLElement;
+            const top = target.previousElementSibling as HTMLElement;
+            const bottom = target.nextElementSibling as HTMLElement;
+            const top_flex = parseFloat(getComputedStyle(top).flex.split(" ")[0]);
+            const bottom_flex = parseFloat(getComputedStyle(bottom).flex.split(" ")[0]);
+            const total_flex = top_flex + bottom_flex;
+            const top_y = top.getBoundingClientRect().top;
+            const bottom_y = bottom.getBoundingClientRect().bottom;
+            const width = bottom_y - top_y;
+            document.onmousemove = (e) => {
+                const ratio = (e.clientX - top_y) / width;
+                console.log(ratio);
+                top.style.flex = "" + ratio * total_flex;
+                bottom.style.flex = "" + (1 - ratio) * total_flex;
+            };
+            document.onmouseup = () => {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            };
+        });
+    }
 };
 
 let currentTheme = 0;
@@ -51,4 +75,33 @@ function nextTheme() { // Used directly in HTML as demonstration (for now)
         root.style.setProperty("--background", colors[currentTheme][0]);
         root.style.setProperty("--main-color", colors[currentTheme][1]);
     }
+}
+
+function addPanelTest(name : string) {
+    fetch("./panels/" + name + ".html")
+    .then(async res => {
+        const spliceTarget = document.getElementById("panel-test-target");
+        if(spliceTarget) spliceTarget.innerHTML = await res.text();
+    })
+    .catch(alert);
+}
+
+const textRenderObserver = new MutationObserver((mutationList) => {
+    for (const mutation of mutationList) {
+        if (mutation.type === "childList") {
+            mutation.addedNodes.forEach(el => {
+                console.log(el);
+                switch(el.getAttribute("data-render-timing")) {
+                    default:
+                        addEventListener(el.getAttribute("data-render-timing"), (e) => e.innerHTML = renderString(e.innerHTML));
+                }
+            });
+        }
+    }
+});
+
+textRenderObserver.observe(document.body, { subtree: true, childList: true });
+
+function renderString(text : string) {
+    return `<em>${text}</em>`;
 }
