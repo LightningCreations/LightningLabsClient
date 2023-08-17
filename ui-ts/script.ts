@@ -77,6 +77,7 @@ function nextTheme() { // Used directly in HTML as demonstration (for now)
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function addPanelTest(name : string) {
     fetch("./panels/" + name + ".html")
     .then(async res => {
