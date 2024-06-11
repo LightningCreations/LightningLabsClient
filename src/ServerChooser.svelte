@@ -10,20 +10,22 @@
   let serverUrl = servers[0].url;
 </script>
 
-<div class="flex justify-center items-center flex-col">
+<div class="flex flex-col justify-center items-center">
   <h1 class="text-2xl">Enter a server address:</h1>
-  <select class="rounded-lg bg-cyan-50 dark:bg-cyan-900 px-3 py-1.5 m-1" bind:value={serverUrl}>
-    {#each servers as server}
-      <option value={server.url}>{server.name}</option>
-    {/each}
-  </select>
-  {#if serverUrl === 'other'}
-    <input
-      class="rounded-lg bg-cyan-50 dark:bg-cyan-900 px-3 py-1.5 m-1"
-      transition:slide
-      placeholder="some.ll.server" />
-  {/if}
-  <button class="rounded-lg bg-cyan-50 dark:bg-cyan-900 px-3 py-1.5 m-1 border-slate-400 border-x-2 border-y-2">
-    Let's go!
-  </button>
+  <div class="flex flex-row">
+    <select class="px-3 py-1.5 m-1 bg-cyan-50 rounded-lg dark:bg-cyan-900" bind:value={serverUrl}>
+      {#each servers as server}
+        <option value={server.url}>{server.name}</option>
+      {/each}
+    </select>
+    {#if serverUrl === 'other'}
+      <input
+        class="px-3 py-1.5 m-1 bg-cyan-50 rounded-lg dark:bg-cyan-900"
+        transition:slide={{ axis: 'x' }}
+        placeholder="some.ll.server" />
+    {/if}
+    <button class="px-3 py-1.5 m-1 bg-cyan-50 rounded-lg dark:bg-cyan-900 border-slate-400 border-x-2 border-y-2">
+      Let's go!
+    </button>
+  </div>
 </div>
