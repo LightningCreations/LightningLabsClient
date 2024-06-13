@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onDestroy } from 'svelte';
   import { groupedMessages, messages } from '../lib/messages';
   import MessageGroup from './MessageGroup.svelte';
 
