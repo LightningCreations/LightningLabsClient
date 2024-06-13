@@ -55,7 +55,7 @@
       type="text"
       name="username"
       id="usernameInput"
-      class="p-4 py-2 rounded-lg text-zinc-800"
+      class="p-4 py-2 border-2 rounded-lg outline-none bg-cyan-300 dark:bg-cyan-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-300 border-cyan-400 focus:border-cyan-600 dark:border-cyan-600 dark:focus:border-cyan-400"
       placeholder="username"
       bind:value={username} />
 
@@ -75,7 +75,7 @@
       type="text"
       name="message"
       id="messageInput"
-      class="w-full p-4 py-2 rounded-lg text-zinc-800"
+      class="w-full p-4 py-2 border-2 rounded-lg outline-none bg-cyan-300 dark:bg-cyan-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-300 border-cyan-400 focus:border-cyan-600 dark:border-cyan-600 dark:focus:border-cyan-400"
       placeholder={`something ${placeholders[placeholderIndex]}...`}
       bind:value={message} />
 

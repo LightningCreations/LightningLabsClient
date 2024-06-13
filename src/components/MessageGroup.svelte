@@ -17,8 +17,8 @@
 
   <div class="inline-block">
     <p>
-      <span class="font-semibold text-zinc-200">{firstMessage.author}</span>
-      <span class="text-xs text-zinc-400">{moment(firstMessage.createdAt).calendar()}</span>
+      <span class="font-semibold text-zinc-900 dark:text-zinc-200">{firstMessage.author}</span>
+      <span class="text-xs text-zinc-700 dark:text-zinc-400">{moment(firstMessage.createdAt).calendar()}</span>
       <!-- 
         Note: the above mechanism for displaying the timestamp works, but it has one fatal
         flaw: if no messages are received for a long enough time, e.g. a day, it will become
@@ -29,7 +29,7 @@
     </p>
 
     {#each messageContents as messageContent}
-      <p class="text-base text-zinc-300">{messageContent}</p>
+      <p class="text-base text-zinc-800 dark:text-zinc-300">{messageContent}</p>
     {/each}
   </div>
 </div>
