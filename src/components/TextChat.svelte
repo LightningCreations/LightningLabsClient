@@ -35,6 +35,18 @@
   </div>
 
   <form on:submit|preventDefault={postMessage} class="w-full">
+    <!-- Todo: input:text has really really ugly handling for long text and multi-paragraph inputs -->
+    <!--
+      This is not an easy problem to solve. Some good reading, particularly in the comments, can be found
+      here: https://css-tricks.com/auto-growing-inputs-textareas/
+
+      Off-hand, my current approach is likely to use a textarea instead of a form and input:text. This has the
+      advantage of multi-line input support out of the box. The drawback however is that we would need to capture
+      <ENTER> and <SHIFT + ENTER> to make the former post the message (text context aware, of course, as we don't
+      want to send the message if the user is typing code for example) and the latter move to a new line.
+
+      Another approach may be to simply pull in an existing library.
+    -->
     <input
       type="text"
       name="message"
