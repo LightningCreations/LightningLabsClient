@@ -11,7 +11,7 @@ const adminAuthor = 'Admin';
 const adminImage = 'https://picsum.photos/seed/Admin/48';
 
 const userAuthor = 'Connor Horman';
-const userImage = 'https://picsum.photos/seed/User/48';
+const userImage = 'https://picsum.photos/seed/Connor%20Horman/48';
 
 const messageStore = writable<Message[]>([
   {

@@ -1,24 +1,39 @@
 <script lang="ts">
+  import { onDestroy, onMount } from 'svelte';
   import { groupedMessages, messages } from '../lib/messages';
   import MessageGroup from './MessageGroup.svelte';
 
-  let userMessageContent: string = '';
+  let placeholders: string[] = ['nice', 'cool', 'funny', 'fancy'];
+  let placeholderIndex: number;
+  $: placeholderIndex = 0;
+
+  let placeholderChangeTimeout = setInterval(() => {
+    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+  }, 1500);
+
+  onDestroy(() => {
+    clearInterval(placeholderChangeTimeout);
+  });
+
+  let username: string = 'kilbouri';
+  let message: string = '';
   const postMessage = () => {
+    console.log('POST!');
     // Don't send empty messages.
-    if (!userMessageContent) {
+    if (!message) {
       return;
     }
 
     messages.update((msgs) =>
       msgs.concat({
         createdAt: Date.now(),
-        author: 'Isaac Kilbourne',
-        authorImage: 'https://picsum.photos/seed/eyezick/48',
-        content: userMessageContent,
+        authorImage: `https://picsum.photos/seed/${username}/48`,
+        author: username,
+        content: message,
       }),
     );
 
-    userMessageContent = '';
+    message = '';
   };
 </script>
 
@@ -34,7 +49,16 @@
     {/each}
   </div>
 
-  <form on:submit|preventDefault={postMessage} class="w-full">
+  <form on:submit|preventDefault={postMessage} class="flex flex-row w-full gap-2 flex-nowrap">
+    <!-- This is temporary, for mocking purposes -->
+    <input
+      type="text"
+      name="username"
+      id="usernameInput"
+      class="p-4 py-2 rounded-lg text-zinc-800"
+      placeholder="username"
+      bind:value={username} />
+
     <!-- Todo: input:text has really really ugly handling for long text and multi-paragraph inputs -->
     <!--
       This is not an easy problem to solve. Some good reading, particularly in the comments, can be found
@@ -52,6 +76,13 @@
       name="message"
       id="messageInput"
       class="w-full p-4 py-2 rounded-lg text-zinc-800"
-      bind:value={userMessageContent} />
+      placeholder={`something ${placeholders[placeholderIndex]}...`}
+      bind:value={message} />
+
+    <!-- 
+      This allows the user to press enter to submit the form. Turns out having multiple
+      text inputs disables this behaviour, even though having a single text input is fine.
+    -->
+    <input type="submit" hidden />
   </form>
 </div>
