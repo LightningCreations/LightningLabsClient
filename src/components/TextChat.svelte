@@ -55,7 +55,7 @@
       type="text"
       name="username"
       id="usernameInput"
-      class="p-6 py-3 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-800 dark:placeholder:text-zinc-400 focus:border-cyan-500 dark:focus:border-cyan-400"
+      class="p-6 py-3 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-700 dark:placeholder:text-zinc-400"
       placeholder="username"
       bind:value={username} />
 
@@ -75,7 +75,7 @@
       type="text"
       name="message"
       id="messageInput"
-      class="w-full p-6 py-3 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-800 dark:placeholder:text-zinc-400 focus:border-cyan-500 dark:focus:border-cyan-400"
+      class="w-full p-6 py-3 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-700 dark:placeholder:text-zinc-400"
       placeholder={`something ${placeholders[placeholderIndex]}...`}
       bind:value={message} />
 
