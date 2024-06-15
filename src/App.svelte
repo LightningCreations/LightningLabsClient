@@ -1,20 +1,27 @@
 <script lang="ts">
-  import ServerChooser from './ServerChooser.svelte';
+  import ServerChooser from './components/ServerChooser.svelte';
   import TextChat from './components/TextChat.svelte';
+  import LoginForm from './components/LoginForm.svelte';
   import { PaneGroup, Pane, PaneResizer } from 'paneforge';
+  import LabsPaneResizer from './components/LabsPaneResizer.svelte';
 </script>
 
 <PaneGroup direction="vertical">
   <Pane>
-    <ServerChooser />
+    <PaneGroup direction="horizontal">
+      <Pane>
+        <ServerChooser />
+      </Pane>
+
+      <LabsPaneResizer />
+
+      <Pane class="flex flex-col items-center justify-center">
+        <LoginForm />
+      </Pane>
+    </PaneGroup>
   </Pane>
 
-  <PaneResizer
-    class="flex justify-center py-1 border-t-2 border-b-2 outline-none border-zinc-300 dark:border-zinc-700 focus:outline focus:outline-cyan-500">
-    <span class="flex items-center w-12 h-3 text-center text-black rounded-lg bg-cyan-500">
-      <div class="w-8 h-px mx-auto bg-black"></div>
-    </span>
-  </PaneResizer>
+  <LabsPaneResizer horizontal />
 
   <Pane>
     <TextChat />
