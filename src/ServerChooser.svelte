@@ -1,7 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
 
-  const servers = [
+  let servers: { name: string; url: string }[] = [
     { name: 'LC Official', url: 'll.lcdev.xyz' },
     { name: 'LL In-development', url: 'll-dev.lcdev.xyz' },
     { name: 'Other...', url: 'other' },
@@ -10,21 +10,27 @@
   let serverUrl = servers[0].url;
 </script>
 
-<div class="flex flex-col justify-center items-center">
-  <h1 class="text-2xl">Enter a server address:</h1>
-  <div class="flex flex-row">
-    <select class="px-3 py-1.5 m-1 bg-cyan-50 rounded-lg dark:bg-cyan-900" bind:value={serverUrl}>
+<div class="mx-auto w-max">
+  <h1 class="my-2 text-2xl font-semibold text-left">Select a Server</h1>
+  <div class="flex flex-row gap-2">
+    <select
+      class="p-4 py-2 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+      bind:value={serverUrl}>
       {#each servers as server}
         <option value={server.url}>{server.name}</option>
       {/each}
     </select>
+
+    <!-- When the user selects 'other', we need to show them a field to input the address -->
     {#if serverUrl === 'other'}
       <input
-        class="px-3 py-1.5 m-1 bg-cyan-50 rounded-lg dark:bg-cyan-900"
-        transition:slide={{ axis: 'x' }}
-        placeholder="some.ll.server" />
+        placeholder="some.ll.server"
+        class="p-4 py-2 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+        transition:slide={{ axis: 'x' }} />
     {/if}
-    <button class="px-3 py-1.5 m-1 bg-cyan-50 rounded-lg dark:bg-cyan-900 border-slate-400 border-x-2 border-y-2">
+
+    <button
+      class="p-4 py-2 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-cyan-500 text-zinc-800 active:bg-cyan-600">
       Let's go!
     </button>
   </div>
