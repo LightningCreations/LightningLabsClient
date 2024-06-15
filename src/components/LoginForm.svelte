@@ -1,6 +1,6 @@
 <script lang="ts">
-  let userEmail: string | undefined, userPassword: string | undefined;
-  $: userEmail = userPassword = undefined;
+  let userEmail: string | undefined;
+  let userPassword: string | undefined;
 
   const login = () => {
     console.table({ email: userEmail, password: userPassword });
