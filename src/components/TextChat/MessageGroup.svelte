@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Message } from '../lib/messages';
+  import type { Message } from '../../lib/messages';
+  import { users, type User } from '../../lib/users';
   import moment from 'moment';
-  import { users, type User } from '../lib/users';
 
   export let firstMessage: Message;
   export let otherMessages: Message[] = [];

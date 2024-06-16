@@ -1,9 +1,9 @@
 <script lang="ts">
   import ServerChooser from './components/ServerChooser.svelte';
-  import TextChat from './components/TextChat.svelte';
-  import LoginForm from './components/LoginForm.svelte';
-  import { PaneGroup, Pane, PaneResizer } from 'paneforge';
+  import TextChat from './components/TextChat/TextChat.svelte';
   import LabsPaneResizer from './components/LabsPaneResizer.svelte';
+  import LoginForm from './components/LoginForm.svelte';
+  import { PaneGroup, Pane } from 'paneforge';
 </script>
 
 <PaneGroup direction="vertical">

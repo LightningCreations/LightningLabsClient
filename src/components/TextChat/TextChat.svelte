@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
-  import { groupedMessages, messages } from '../lib/messages';
   import MessageGroup from './MessageGroup.svelte';
-  import { users } from '../lib/users';
+  import { onDestroy } from 'svelte';
+  import { groupedMessages, messages } from '../../lib/messages';
+  import { users } from '../../lib/users';
 
   let placeholders: string[] = ['nice', 'cool', 'funny', 'fancy'];
   let placeholderIndex: number = 0;
