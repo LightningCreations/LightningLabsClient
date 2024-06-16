@@ -1,9 +1,10 @@
 <script lang="ts">
+  import ChannelList from './ChannelList.svelte';
+  import UserList from './UserList.svelte';
   import MessageGroup from './MessageGroup.svelte';
   import { onDestroy } from 'svelte';
   import { groupedMessages, messages } from '../../lib/messages';
   import { users } from '../../lib/users';
-  import UserList from './UserList.svelte';
 
   let placeholders: string[] = ['nice', 'cool', 'funny', 'fancy'];
   let placeholderIndex: number = 0;
@@ -37,6 +38,11 @@
 </script>
 
 <div class="flex flex-row h-full flex-nowrap">
+  <!-- Channel list -->
+  <div class="flex-shrink-0 overflow-y-auto bg-zinc-300 dark:bg-zinc-800">
+    <ChannelList />
+  </div>
+
   <!-- Text chat -->
   <div class="flex flex-col justify-end flex-grow h-full p-4 pt-0">
     <div class="flex flex-col-reverse flex-1 overflow-y-auto">
