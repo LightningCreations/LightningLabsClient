@@ -1,9 +1,11 @@
 import { derived, writable } from 'svelte/store';
+import type { Message } from './messages';
 
 interface Channel {
   id: number;
   name: string;
   category: string;
+  getMessages: () => Promise<Message[]>;
 }
 
 const currentChannelIdStore = writable<number>(0);
@@ -12,16 +14,55 @@ const channelsStore = writable<Channel[]>([
     id: 0,
     name: 'general',
     category: 'General',
+    getMessages: async () => [
+      {
+        authorId: 0,
+        createdAt: Date.now() - 100000,
+        content: 'Welcome to Lightning Labs!',
+      },
+      {
+        authorId: 0,
+        createdAt: Date.now() - 100000,
+        content:
+          "This is your place to hang out, chat, develop stuff, and other things. Words words, long content. Demo message, y'know?",
+      },
+      {
+        authorId: 1,
+        createdAt: Date.now() - 25000,
+        content: 'First!',
+      },
+      {
+        authorId: 2,
+        createdAt: Date.now(),
+        content: 'Does this have governance? If not, can I make some?',
+      },
+    ],
   },
   {
     id: 1,
     name: 'governance',
     category: 'LC Stuff',
+    getMessages: async () => {
+      await new Promise((res) => setTimeout(res, 2000));
+      return [
+        {
+          authorId: 0,
+          createdAt: Date.now() - 100000,
+          content: 'Welcome to #governance!',
+        },
+        {
+          authorId: 2,
+          createdAt: Date.now(),
+          content: 'First!',
+        },
+      ];
+    },
   },
   {
     id: 2,
     name: 'lightning-labs',
     category: 'LC Stuff',
+    getMessages: async () => [],
   },
 ]);
 
