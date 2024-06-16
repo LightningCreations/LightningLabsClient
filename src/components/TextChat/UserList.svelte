@@ -2,7 +2,7 @@
   import { users } from '../../lib/users';
 </script>
 
-<div class="flex flex-col w-64 gap-2 p-3 px-4 overflow-hidden">
+<div class="flex flex-col gap-2 p-3 px-4">
   {#each $users as user}
     <div class="flex flex-row items-center gap-2">
       <img
@@ -11,7 +11,7 @@
         class="inline-block text-sm rounded-full size-8" />
 
       <!-- Ellipses overflow requires constrained width, whitespace nowrap, and overflow hidden -->
-      <p class="overflow-hidden font-semibold text-zinc-900 dark:text-zinc-200 text-ellipsis whitespace-nowrap">
+      <p class="overflow-hidden font-semibold w-44 text-zinc-900 dark:text-zinc-200 text-ellipsis whitespace-nowrap">
         {user.displayName}
       </p>
     </div>

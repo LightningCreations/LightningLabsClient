@@ -88,7 +88,7 @@
     </form>
   </div>
 
-  <div class="overflow-y-auto bg-zinc-800">
+  <div class="flex-shrink-0 overflow-y-auto bg-zinc-800">
     <UserList />
   </div>
 </div>
