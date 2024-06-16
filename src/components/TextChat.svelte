@@ -2,10 +2,10 @@
   import { onDestroy } from 'svelte';
   import { groupedMessages, messages } from '../lib/messages';
   import MessageGroup from './MessageGroup.svelte';
+  import { users } from '../lib/users';
 
   let placeholders: string[] = ['nice', 'cool', 'funny', 'fancy'];
-  let placeholderIndex: number;
-  $: placeholderIndex = 0;
+  let placeholderIndex: number = 0;
 
   let placeholderChangeTimeout = setInterval(() => {
     placeholderIndex = (placeholderIndex + 1) % placeholders.length;
@@ -15,10 +15,9 @@
     clearInterval(placeholderChangeTimeout);
   });
 
-  let username: string = 'kilbouri';
+  let selectedAuthorId: number = 0;
   let message: string = '';
   const postMessage = () => {
-    console.log('POST!');
     // Don't send empty messages.
     if (!message) {
       return;
@@ -26,9 +25,8 @@
 
     messages.update((msgs) =>
       msgs.concat({
+        authorId: selectedAuthorId,
         createdAt: Date.now(),
-        authorImage: `https://picsum.photos/seed/${username}/48`,
-        author: username,
         content: message,
       }),
     );
@@ -51,13 +49,13 @@
 
   <form on:submit|preventDefault={postMessage} class="flex flex-row w-full gap-2 flex-nowrap">
     <!-- This is temporary, for mocking purposes -->
-    <input
-      type="text"
-      name="username"
-      id="usernameInput"
-      class="p-6 py-3 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-700 dark:placeholder:text-zinc-400"
-      placeholder="username"
-      bind:value={username} />
+    <select
+      class="p-4 py-2 rounded-lg outline-none focus:outline focus:outline-cyan-500 bg-zinc-300 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+      bind:value={selectedAuthorId}>
+      {#each $users as user}
+        <option value={user.id}>{user.displayName}</option>
+      {/each}
+    </select>
 
     <!-- Todo: input:text has really really ugly handling for long text and multi-paragraph inputs -->
     <!--
