@@ -2,35 +2,30 @@ import { derived, writable } from 'svelte/store';
 
 interface Message {
   createdAt: number; // unix timestamp
-  author: string;
-  authorImage: string;
+  authorId: number;
   content: string;
 }
 
-const adminAuthor = 'Admin';
-const adminImage = 'https://picsum.photos/seed/Admin/48';
-
-const userAuthor = 'Connor Horman';
-const userImage = 'https://picsum.photos/seed/Connor%20Horman/48';
-
 const messageStore = writable<Message[]>([
   {
-    createdAt: Date.now() - 1000,
-    author: adminAuthor,
-    authorImage: adminImage,
+    authorId: 0,
+    createdAt: Date.now() - 100000,
     content: 'Welcome to Lightning Labs!',
   },
   {
-    createdAt: Date.now() - 500,
-    author: adminAuthor,
-    authorImage: adminImage,
+    authorId: 0,
+    createdAt: Date.now() - 100000,
     content:
       "This is your place to hang out, chat, develop stuff, and other things. Words words, long content. Demo message, y'know?",
   },
   {
+    authorId: 1,
+    createdAt: Date.now() - 25000,
+    content: 'First!',
+  },
+  {
+    authorId: 2,
     createdAt: Date.now(),
-    author: userAuthor,
-    authorImage: userImage,
     content: 'Does this have governance? If not, can I make some?',
   },
 ]);
@@ -54,7 +49,7 @@ const groupedMessageStore = derived(messageStore, (messages) => {
     const previousMessage = currentGroup.at(-1)!;
     const timeDifference = message.createdAt - previousMessage.createdAt;
 
-    if (previousMessage.author !== message.author || timeDifference > MAX_GROUP_IDLE_TIME) {
+    if (previousMessage.authorId !== message.authorId || timeDifference > MAX_GROUP_IDLE_TIME) {
       // store previous group and start a new one
       groups.push(currentGroup);
       currentGroup = [];
