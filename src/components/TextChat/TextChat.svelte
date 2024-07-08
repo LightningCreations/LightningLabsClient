@@ -28,6 +28,9 @@
     message = '';
   };
 
+  //! Note that for the time being .getMessages() does not cause issues because the promise resolves
+  //! immediately. A more intelligent mechanism is needed to prevent extraneous server loading and
+  //! bad UX
   let groupedMessages: Promise<Message[][]>;
   $: groupedMessages = $currentChannel?.getMessages().then((msgs) => groupMessages(msgs)) ?? Promise.resolve([]);
 </script>
