@@ -6,15 +6,13 @@ interface Channel {
   name: string;
   category: string;
   getMessages: () => Promise<Message[]>;
+  sendMessage: (msg: Message) => Promise<any>;
 }
 
-const currentChannelIdStore = writable<number>(0);
-const channelsStore = writable<Channel[]>([
-  {
-    id: 0,
-    name: 'general',
-    category: 'General',
-    getMessages: async () => [
+const MESSAGE_MAP: Map<Channel['id'], Message[]> = new Map([
+  [
+    0,
+    [
       {
         authorId: 0,
         createdAt: Date.now() - 100000,
@@ -37,32 +35,68 @@ const channelsStore = writable<Channel[]>([
         content: 'Does this have governance? If not, can I make some?',
       },
     ],
+  ],
+  [
+    1,
+    [
+      {
+        authorId: 0,
+        createdAt: Date.now() - 100000,
+        content: 'Welcome to #governance!',
+      },
+      {
+        authorId: 2,
+        createdAt: Date.now(),
+        content: 'First!',
+      },
+    ],
+  ],
+]);
+
+//! temporary mechanisms as the map will surely be replaced in the near future...
+const GET_MESSAGE_MAP_WRITER = (id: number) => {
+  return async (msg: Message) => {
+    const existing = MESSAGE_MAP.get(id);
+
+    if (!existing) {
+      MESSAGE_MAP.set(id, [msg]);
+    } else {
+      existing.push(msg);
+    }
+
+    // hack to notify the subs
+    channelsStore.update((val) => val);
+  };
+};
+
+const GET_MESSAGE_MAP_READER = (id: number) => {
+  return async (): Promise<Message[]> => {
+    return MESSAGE_MAP.get(id) ?? [];
+  };
+};
+
+const currentChannelIdStore = writable<number>(0);
+const channelsStore = writable<Channel[]>([
+  {
+    id: 0,
+    name: 'general',
+    category: 'General',
+    getMessages: GET_MESSAGE_MAP_READER(0),
+    sendMessage: GET_MESSAGE_MAP_WRITER(0),
   },
   {
     id: 1,
     name: 'governance',
     category: 'LC Stuff',
-    getMessages: async () => {
-      await new Promise((res) => setTimeout(res, 2000));
-      return [
-        {
-          authorId: 0,
-          createdAt: Date.now() - 100000,
-          content: 'Welcome to #governance!',
-        },
-        {
-          authorId: 2,
-          createdAt: Date.now(),
-          content: 'First!',
-        },
-      ];
-    },
+    getMessages: GET_MESSAGE_MAP_READER(1),
+    sendMessage: GET_MESSAGE_MAP_WRITER(1),
   },
   {
     id: 2,
     name: 'lightning-labs',
     category: 'LC Stuff',
-    getMessages: async () => [],
+    getMessages: GET_MESSAGE_MAP_READER(2),
+    sendMessage: GET_MESSAGE_MAP_WRITER(2),
   },
 ]);
 

@@ -4,17 +4,26 @@
   import MessageGroup from './MessageGroup.svelte';
   import LoadingSpinner from '../LoadingSpinner.svelte';
   import { users } from '../../lib/users';
-  import { currentChannel } from '../../lib/channels';
+  import { allChannels, currentChannel, currentChannelId } from '../../lib/channels';
   import { onDestroy } from 'svelte';
   import { groupMessages, type Message } from '../../lib/messages';
 
   let selectedAuthorId: number = 0;
   let message: string = '';
-  const postMessage = () => {
+
+  const postMessage = async () => {
     // Don't send empty messages.
     if (!message) {
       return;
     }
+
+    const messageToSend: Message = {
+      authorId: selectedAuthorId,
+      content: message,
+      createdAt: Date.now(),
+    };
+
+    await $currentChannel?.sendMessage(messageToSend);
 
     message = '';
   };
