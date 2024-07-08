@@ -40,15 +40,14 @@
   <div class="flex-shrink-0 overflow-y-auto bg-zinc-300 dark:bg-zinc-800">
     <ChannelList />
   </div>
-
   <!-- Text chat -->
   <div class="flex flex-col justify-end flex-grow h-full p-4 pt-0">
     <div class="flex flex-col-reverse flex-1 overflow-y-auto">
       <!-- 
-      We need to reverse the messages as we are using flex-col-reverse to
-      force the content to the end of the container. I would have liked to
-      use justify-end instead but for whatever reason that prevents scrollling.
-    -->
+        We need to reverse the messages as we are using flex-col-reverse to
+        force the content to the end of the container. I would have liked to
+        use justify-end instead but for whatever reason that prevents scrollling.
+      -->
       {#await groupedMessages}
         <div class="flex flex-col items-center p-4">
           <div class="size-8 text-cyan-500">
