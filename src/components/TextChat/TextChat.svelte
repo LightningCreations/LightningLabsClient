@@ -4,6 +4,7 @@
   import { groupedMessages, messages } from '../../lib/messages';
   import { users } from '../../lib/users';
   import UserList from './UserList.svelte';
+  import { v7 as uuidv7, NIL as NIL_UUID } from 'uuid';
 
   let placeholders: string[] = ['nice', 'cool', 'funny', 'fancy'];
   let placeholderIndex: number = 0;
@@ -26,6 +27,11 @@
 
     messages.update((msgs) =>
       msgs.concat({
+        id: uuidv7(),
+        parent_id: NIL_UUID, // ID of the channel the message was sent in
+        owner_id: NIL_UUID,
+        dacl_id: NIL_UUID,
+
         authorId: selectedAuthorId,
         createdAt: Date.now(),
         content: message,

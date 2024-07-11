@@ -1,6 +1,11 @@
 import { derived, writable } from 'svelte/store';
 
 interface Message {
+  id?: string;
+  parent_id?: string;
+  owner_id?: string;
+  dacl_id?: string;
+
   createdAt: number; // unix timestamp
   authorId: number;
   content: string;
@@ -40,7 +45,7 @@ const groupedMessageStore = derived(messageStore, (messages) => {
     return [];
   }
 
-  let groups: Message[][] = [];
+  const groups: Message[][] = [];
   let currentGroup: Message[] = [messages[0]];
 
   for (const message of messages.slice(1)) {
