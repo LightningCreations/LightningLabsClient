@@ -1,36 +1,10 @@
-import { derived, writable } from 'svelte/store';
-
 interface Message {
   createdAt: number; // unix timestamp
   authorId: number;
   content: string;
 }
 
-const messageStore = writable<Message[]>([
-  {
-    authorId: 0,
-    createdAt: Date.now() - 100000,
-    content: 'Welcome to Lightning Labs!',
-  },
-  {
-    authorId: 0,
-    createdAt: Date.now() - 100000,
-    content:
-      "This is your place to hang out, chat, develop stuff, and other things. Words words, long content. Demo message, y'know?",
-  },
-  {
-    authorId: 1,
-    createdAt: Date.now() - 25000,
-    content: 'First!',
-  },
-  {
-    authorId: 2,
-    createdAt: Date.now(),
-    content: 'Does this have governance? If not, can I make some?',
-  },
-]);
-
-const groupedMessageStore = derived(messageStore, (messages) => {
+const groupMessages = (messages: Message[]) => {
   // group messages as long as they are within the sameish time interval
   // and by the same author
 
@@ -64,6 +38,6 @@ const groupedMessageStore = derived(messageStore, (messages) => {
   groups.push(currentGroup);
 
   return groups;
-});
+};
 
-export { type Message, messageStore as messages, groupedMessageStore as groupedMessages };
+export { type Message, groupMessages };
