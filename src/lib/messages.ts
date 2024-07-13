@@ -1,10 +1,11 @@
 import { derived, writable } from 'svelte/store';
+import { v7 as uuidv7 } from 'uuid';
 
 interface Message {
-  id?: string;
-  parent_id?: string;
-  owner_id?: string;
-  dacl_id?: string;
+  id?: uuidv7;
+  parent_id?: uuidv7;
+  owner_id?: uuidv7;
+  dacl_id?: uuidv7;
 
   createdAt: number; // unix timestamp
   authorId: number;
@@ -12,27 +13,27 @@ interface Message {
 }
 
 const messageStore = writable<Message[]>([
-  {
-    authorId: 0,
-    createdAt: Date.now() - 100000,
-    content: 'Welcome to Lightning Labs!',
-  },
-  {
-    authorId: 0,
-    createdAt: Date.now() - 100000,
-    content:
-      "This is your place to hang out, chat, develop stuff, and other things. Words words, long content. Demo message, y'know?",
-  },
-  {
-    authorId: 1,
-    createdAt: Date.now() - 25000,
-    content: 'First!',
-  },
-  {
-    authorId: 2,
-    createdAt: Date.now(),
-    content: 'Does this have governance? If not, can I make some?',
-  },
+  // {
+  //   authorId: 0,
+  //   createdAt: Date.now() - 100000,
+  //   content: 'Welcome to Lightning Labs!',
+  // },
+  // {
+  //   authorId: 0,
+  //   createdAt: Date.now() - 100000,
+  //   content:
+  //     "This is your place to hang out, chat, develop stuff, and other things. Words words, long content. Demo message, y'know?",
+  // },
+  // {
+  //   authorId: 1,
+  //   createdAt: Date.now() - 25000,
+  //   content: 'First!',
+  // },
+  // {
+  //   authorId: 2,
+  //   createdAt: Date.now(),
+  //   content: 'Does this have governance? If not, can I make some?',
+  // },
 ]);
 
 const groupedMessageStore = derived(messageStore, (messages) => {
@@ -71,4 +72,58 @@ const groupedMessageStore = derived(messageStore, (messages) => {
   return groups;
 });
 
-export { type Message, messageStore as messages, groupedMessageStore as groupedMessages };
+async function initializeMessages() {
+  try {
+    const response = await fetch(`http://localhost:8000/api/messages`, {
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin':'*'
+      }
+    })
+    console.log(response);
+    const IDs = await response.json();
+
+    messageStore.set([]);
+    IDs.forEach(async (messageId: uuidv7) => {
+      try {
+        const msg = await fetch(`http://localhost:8000/api/messages/${messageId}`, {
+          mode: 'cors',
+          headers: {
+            'Access-Control-Allow-Origin':'*'
+          }
+        })
+        console.log(msg);
+        const messageBody: Message = await msg.json();
+
+        messageStore.update((currentMessageList) => [...currentMessageList, messageBody]);
+    
+        // console.log(IDs);
+        // console.log(await IDs);
+      } catch(err) {
+        console.error(err);
+      }
+          
+    });
+    // console.log(IDs);
+    // console.log(await IDs);
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function sendMessage(newMessage: Message) { // TODO: obsolete this function
+  const rawResponse = await fetch('http://localhost:8000/api/messages', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newMessage),
+  });
+  const content = await rawResponse.json();
+
+  console.log(content);
+  initializeMessages();
+}
+
+export { type Message, messageStore as messages, groupedMessageStore as groupedMessages, initializeMessages, sendMessage };

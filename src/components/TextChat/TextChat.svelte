@@ -1,7 +1,7 @@
 <script lang="ts">
   import MessageGroup from './MessageGroup.svelte';
   import { onDestroy } from 'svelte';
-  import { groupedMessages, messages } from '../../lib/messages';
+  import { groupedMessages, messages, initializeMessages, sendMessage } from '../../lib/messages';
   import { users } from '../../lib/users';
   import UserList from './UserList.svelte';
   import { v7 as uuidv7, NIL as NIL_UUID } from 'uuid';
@@ -17,6 +17,8 @@
     clearInterval(placeholderChangeTimeout);
   });
 
+  initializeMessages();
+
   let selectedAuthorId: number = 0;
   let message: string = '';
   const postMessage = () => {
@@ -25,18 +27,19 @@
       return;
     }
 
-    messages.update((msgs) =>
-      msgs.concat({
+    const newMessage = {
         id: uuidv7(),
-        parent_id: NIL_UUID, // ID of the channel the message was sent in
-        owner_id: NIL_UUID,
-        dacl_id: NIL_UUID,
+        parent_id: NIL_UUID, // UUID of the channel the message was sent in
+        owner_id: NIL_UUID, // UUID of the author
+        dacl_id: NIL_UUID, // Permissions...?
 
         authorId: selectedAuthorId,
         createdAt: Date.now(),
         content: message,
-      }),
-    );
+      };
+
+    // messages.update((msgs) => msgs.concat(newMessage));
+    sendMessage(newMessage);
 
     message = '';
   };
