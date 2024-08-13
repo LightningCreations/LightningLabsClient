@@ -3,6 +3,8 @@
   import { users, type User } from '../../lib/users';
   import moment from 'moment';
 
+  import TextRenderer from './TextRenderer.svelte';
+
   export let firstMessage: Message;
   export let otherMessages: Message[] = [];
 
@@ -37,7 +39,7 @@
     </p>
 
     {#each messageContents as messageContent}
-      <p class="text-base text-zinc-800 dark:text-zinc-300">{messageContent}</p>
+      <p class="text-base text-zinc-800 dark:text-zinc-300"><TextRenderer text={messageContent}/></p>
     {/each}
   </div>
 </div>
